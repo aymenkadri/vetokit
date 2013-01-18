@@ -1,3 +1,3 @@
 beoctopus
 =========
-Be Like Octopus, a solution to manage your depense
+Be Like Octopus, a solution to optimise your depenses
