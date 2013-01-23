@@ -5,16 +5,16 @@
 
 <web-app>
 
-  <!-- Servlets -->
+  <!-- Servlets
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.miringue.beocotpus.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>com.miringue.beoctopus.server.GreetingServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/beoctopus/greet</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 
   <!-- Default page to serve -->
   <welcome-file-list>
