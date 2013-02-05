@@ -5,7 +5,7 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-    <display-name>jeanne</display-name>
+    <display-name>vetokit</display-name>
 
   <!-- Servlets -->
   <servlet>
