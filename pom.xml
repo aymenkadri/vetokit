@@ -1,112 +1,250 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.miringue.beoctopus</groupId>
-    <artifactId>beoctopus</artifactId>
+    <groupId>com.miringue.vetokit</groupId>
+    <artifactId>vetokit</artifactId>
+    <version>1.0</version>
+
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>gwt-activityandplaces-requestfactory</name>
-    <description>GWT activity and places using the RequestFactory.</description>
+
+    <name>Vetokit</name>
+    <description>Vetokit</description>
 
     <properties>
+		<gwt.version>2.5.0</gwt.version>
+		<gin.version>2.0.0</gin.version>
         <gae.version>1.7.3</gae.version>
-        <gae.runtime>1.7.3</gae.runtime>
-        <!-- Convenience property to set the GWT version -->
+        <gwt-bootstrap.version>2.0.4.0</gwt-bootstrap.version>
+        <gwt-widget.version>1.1</gwt-widget.version>
+        <objectify.version>4.0b1</objectify.version>
+        <junit.version>4.11</junit.version>
+        <mockito.version>1.9.0</mockito.version>
+        <fest.version>1.4</fest.version>
+        <slf4j.version>1.6.1</slf4j.version>
+        <commons-fileupload.version>1.2</commons-fileupload.version>
+        <jstl.version>1.2</jstl.version>
+        <spring-webmvc.version>3.1.1.RELEASE</spring-webmvc.version>
+        <thymeleaf.version>2.0.14</thymeleaf.version>
+        <guava.version>13.0.1</guava.version>
 
-        <!-- GWT -->
-        <gwt.version>2.5.0</gwt.version>
-        <gwt.style>OBF</gwt.style>
-
-        <!-- Maven -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+                <gwt.style>PRETTY</gwt.style>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>recette</id>
+            <properties>
+                <env>recette</env>
+                <gwt.style>PRETTY</gwt.style>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <properties>
+                <env>release</env>
+                <gwt.style>OBFUSCATED</gwt.style>
+            </properties>
+        </profile>
+    </profiles>
+    
+    <dependencies>
+
+        <!-- ================ Dependencies : GWT ========================== -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ================ Dependency : Gin =========================== -->
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+            <version>${gin.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependency : GWT-Widget =========================== -->
+        <dependency>
+            <groupId>net.sf.gwt-widget</groupId>
+            <artifactId>gwt-sl</artifactId>
+            <version>${gwt-widget.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependencies : GWT-Bootstrap =========================== -->
+        <dependency>
+            <groupId>com.github.gwtbootstrap</groupId>
+            <artifactId>gwt-bootstrap</artifactId>
+            <version>${gwt-bootstrap.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependency : Objectify =========================== -->
+        <dependency>
+            <groupId>com.googlecode.objectify</groupId>
+            <artifactId>objectify</artifactId>
+            <version>${objectify.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependency : AppenEngine =========================== -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ================ Dependencies : Unit tests =========================== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <version>${fest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ================ Dependencies : Logging =========================== -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- ================ Dependencies : Commons =========================== -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependencies : Tag-Lib =========================== -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependencies : Spring-MVC =========================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-webmvc.version}</version>
+        </dependency>
+        
+        <!-- ================ Dependencies : Thymeleaf =========================== -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- ================ Dependencies : Guava =========================== -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        
+    </dependencies>
+
     <build>
-        <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
         <finalName>${project.artifactId}</finalName>
 
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${basedir}/src/main/resources</directory>
             </resource>
         </resources>
+        <!--<testSourceDirectory>${basedir}/test/main/java</testSourceDirectory>  -->
+
+        <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+        
+        <filters>
+            <filter>filter-${env}.properties</filter>
+        </filters>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-                <dependencies>
-                    <!-- Run RequestFactory validation tool. -->
-                    <!-- Install m2e-apt if using Eclipse -->
-                    <dependency>
-                        <groupId>com.google.web.bindery</groupId>
-                        <artifactId>requestfactory-apt</artifactId>
-                        <version>${gwt.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <!-- Skips the GWTTestCases during Junit Testing -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/*GwtTest.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <!-- GWT -->
-            <!-- 'mvn gwt:run' - runs development mode -->
-            <!-- 'mvn gwt:debug' - runs debug mode -->
-            <!-- 'mvn gwt:compile' - compiles gwt -->
-            <!-- 'mvn gwt:test' or 'mvn integration-test' - runs the gwt
-             tests (*GwtTest.java), (run a suite its faster) -->
+            <!-- ================ Plugin : GWT =========================== -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>${gwt.version}</version>
-                <configuration>
-                    <strict>true</strict>
-
-                    <testTimeOut>180</testTimeOut>
-                    <includes>**/*GwtTestSuite.java</includes>
-                    <excludes>**/*GwtTest.java</excludes>
-                    <mode>htmlunit</mode>
-
-                    <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
-                    <logLevel>INFO</logLevel>
-                    <style>${gwt.style}</style>
-
-                    <copyWebapp>true</copyWebapp>
-                    <hostedWebapp>${webappDirectory}</hostedWebapp>
-
-                    <runTarget>beoctopus.html</runTarget>
-
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>test</goal>
                             <goal>compile</goal>
+                            <goal>test</goal>
+                            <!-- <goal>i18n</goal> -->
+                            <!-- <goal>generateAsync</goal> -->
                         </goals>
                     </execution>
                 </executions>
+                <!-- Plugin configuration. There are many available options, see gwt-maven-plugin documentation at codehaus.org -->
+                <configuration>
+                    <runTarget>Vetokit.html</runTarget>
+                    <hostedWebapp>${webappDirectory}</hostedWebapp>
+                    <i18nMessagesBundle>com.miringue.vetokit.bo.client.Messages</i18nMessagesBundle>
+                </configuration>
             </plugin>
 
-            <!-- Copy the war/webapp contents to target directory -->
+            <!-- ================ Plugin : war =========================== -->
+            <!-- Copy static web files before executing gwt:run -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -121,93 +259,43 @@
                 </executions>
                 <configuration>
                     <webappDirectory>${webappDirectory}</webappDirectory>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
+            
+            <!-- ================ Plugin : war =========================== -->
             <plugin>
                 <groupId>net.kindleit</groupId>
                 <artifactId>maven-gae-plugin</artifactId>
                 <version>0.9.0</version>
                 <configuration>
+                    <tasks>
+                        <echo>Displaying value of appengine.sdk.root</echo>
+                        <echo>[appengine.sdk.root] ${appengine.sdk.root}</echo>
+                    </tasks>
                     <serverId>appengine.google.com</serverId>
-                    <unpackVersion>${gae.version}</unpackVersion>
                     <sdkDir>${appengine.sdk.root}</sdkDir>
                     <appDir>${basedir}/target/${project.artifactId}</appDir>
                 </configuration>
             </plugin>
+
+            <!-- ================ Plugin : compiler ======================= -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
-
-    <dependencies>
-        <!-- GWT -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-
-        <!-- RequestFactory -->
-        <dependency>
-            <groupId>com.google.web.bindery</groupId>
-            <artifactId>requestfactory-apt</artifactId>
-            <version>${gwt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.web.bindery</groupId>
-            <artifactId>requestfactory-server</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-
-        <!-- RequestFactory Validation JSR 303 javax.validation -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-impl</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Logging used by the Hibernate validator -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.2</version>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-labs</artifactId>
-            <version>${gae.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- gwtbootstrap -->
-        <dependency>
-            <groupId>com.github.gwtbootstrap</groupId>
-            <artifactId>gwt-bootstrap</artifactId>
-            <version>2.0.4.0</version>
-        </dependency>
-    </dependencies>
 </project>
+

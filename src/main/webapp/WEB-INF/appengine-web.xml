@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>beoctopus</application>
-    <version>1</version>
+    <application>${google.app.id}</application>
+    <version>${google.app.version}</version>
 
     <threadsafe>true</threadsafe>
 

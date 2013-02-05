@@ -1,3 +1,3 @@
-beoctopus
+vetokit
 =========
-Be Like Octopus, a solution to optimise your depenses
+Be Like Octopus, a solution for veto cabinet
