@@ -48,8 +48,8 @@ public class Client implements IsSerializable, HasId {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Medicament) {
-			final Medicament that = (Medicament) obj;
+		if (obj instanceof Client) {
+			final Client that = (Client) obj;
 			return Objects.equal(id, that.id);
 		}
 		return false;
