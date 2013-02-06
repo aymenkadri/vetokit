@@ -26,6 +26,33 @@
     <url-pattern>/Vetokit/gwtServices/articleRPC</url-pattern>
   </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ClientService</servlet-name>
+        <servlet-class>com.miringue.vetokit.back.server.rpc.ClientRPCServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientService</servlet-name>
+        <url-pattern>/Vetokit/gwtServices/clientRPC</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LaboratoireService</servlet-name>
+        <servlet-class>com.miringue.vetokit.back.server.rpc.LaboratoireRPCServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LaboratoireService</servlet-name>
+        <url-pattern>/Vetokit/gwtServices/laboratoireRPC</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MedicamentService</servlet-name>
+        <servlet-class>com.miringue.vetokit.back.server.rpc.MedicamentRPCServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MedicamentService</servlet-name>
+        <url-pattern>/Vetokit/gwtServices/medicamentRPC</url-pattern>
+    </servlet-mapping>
+
     
   <!-- Default page to serve -->
   <welcome-file-list>
